@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_school_classroom_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2><span t-field="o.name"/></h2>
+                            <h4 class="mt-5">List of Teacher</h4>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th class="text-start">NIP</th>
+                                        <th class="text-start">Teacher Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.teacher_ids" t-as="teacher">
+                                        <td class="text-start"><t t-esc="teacher.nip"/></td>
+                                        <td class="text-start"><t t-esc="teacher.name"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h4 class="mt-5">List of Student</h4>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th class="text-start">NIS</th>
+                                        <th class="text-start">Student Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.student_ids" t-as="student">
+                                        <td class="text-start"><t t-esc="student.nis"/></td>
+                                        <td class="text-start"><t t-esc="student.name"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    
+        <record id="action_report_school_classroom" model="ir.actions.report">
+            <field name="name">School Classroom</field>
+            <field name="model">school.classroom</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">abu_submission_school_mgmt.report_school_classroom_template</field>
+            <field name="report_file">abu_submission_school_mgmt.report_school_classroom_template</field>
+            <field name="print_report_name">'%s' % object.name</field>
+            <field name="binding_model_id" ref="model_school_classroom"/>
+            <field name="binding_type">report</field>
+        </record>  
+    
+    </data>
+    
+</odoo>

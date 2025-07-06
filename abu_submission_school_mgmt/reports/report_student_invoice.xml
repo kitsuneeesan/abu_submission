@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_student_invoice_template">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="header">
+                    <link rel="stylesheet" type="text/css" href="/abu_submission_school_mgmt/static/src/css/report_style.css"/>
+                    <t t-set="company" t-value="o.company_id"/>
+                    <table width="100%" class="bb-1">
+                        <tbody>
+                            <colgroup>
+                                <col width="40%"/>
+                                <col width="60%"/>
+                            </colgroup>
+                            <tr>
+                                <td>
+                                    <img 
+                                        t-if="company.logo" 
+                                        t-att-src="image_data_uri(company.logo)" 
+                                        style="height: 65px;"
+                                        alt="Logo"/>
+                                </td>
+                                <td class="p-0">
+                                    <div class="pl-10">
+                                        <span class="w-100 text-lg bold p-0" t-field="company.name"/><br/>
+                                        <span class="w-100 p-0 m-0"><t t-esc="company.partner_id._display_address(without_company=True)"/></span><br/>
+                                        <span class="w-100 p-0 m-0">Telp. <t t-esc="company.phone"/> | Web : <t t-esc="company.website"/> | Email : <t t-esc="company.email"/></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="page">
+                    <link rel="stylesheet" type="text/css" href="/abu_submission_school_mgmt/static/src/css/report_style.css"/>
+                    <table width="100%" class="bb-1">
+                        <tbody>
+                            <tr>
+                                <td class="text-md text-center bold py-3">BUKTI PEMBAYARAN SISWA</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="100%" class="my-1">
+                        <colgroup>
+                            <col width="15%"/>
+                            <col width="30%"/>
+                            <col width="10%"/>
+                            <col width="15%"/>
+                            <col width="30%"/>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td>NO TRANS</td>
+                                <td>: <t t-esc="o.name"/></td>
+                                <td></td>
+                                <td>NIS</td>
+                                <td>: <t t-esc="o.student_id.nis"/></td>
+                            </tr>
+                            <tr>
+                                <td>TANGGAL</td>
+                                <td>: <t t-if="o.invoice_date" t-esc="o.invoice_date.strftime('%m/%d/%Y')"/></td>
+                                <td></td>
+                                <td>NAMA SISWA</td>
+                                <td>: <t t-esc="o.student_id.name"/></td>
+                            </tr>
+                            <tr>
+                                <td>JAM CETAK</td>
+                                <td>: <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M:%S')"/></td>
+                                <td></td>
+                                <td>KELAS</td>
+                                <td>: <t t-esc="o.student_id.classroom_id.name"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="100%" class="bb-1">
+                        <colgroup>
+                            <col width="5%"/>
+                            <col width="65%"/>
+                            <col width="30%"/>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="by-1 bold py-2 text-center" style="font-size: 16px;">No.</th>
+                                <th class="by-1 bold py-2 text-left" style="font-size: 16px;">Keterangan Pembayaran</th>
+                                <th class="by-1 bold py-2 text-right" style="font-size: 16px;">Jumlah (Rp.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="row_no" t-value="1"/>
+                            <tr t-foreach="o.invoice_line_ids" t-as="line">
+                                <td class="py-1 text-center"><t t-esc="row_no"/>.</td>
+                                <td class="py-1 text-left"><t t-esc="line.name"/></td>
+                                <td class="py-1 text-right"><t t-esc="'{:,.2f}'.format(line.price_subtotal)"/></td>
+
+                                <t t-set="row_no" t-value="row_no+1"/>
+                            </tr>
+                            <tr height="20">
+                                <td colspan="3"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-6">
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td class="bold py-2">Terbilang :</td>
+                                    </tr>
+                                    <tr height="100">
+                                        <td class="italic" style="vertical-align: top;">
+                                            <t t-esc="o.currency_id.with_context(lang='id_ID').amount_to_text(o.amount_total)"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Catatan :</td>
+                                    </tr>
+                                    <tr>
+                                        <td>- Disimpan sebagai bukti pembayaran yang SAH</td>
+                                    </tr>
+                                    <tr>
+                                        <td>- Uang yang sudah dibayarkan tidak dapat diminta kembali</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-6">
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td class="bold py-2 bb-1 text-right">Grand Total :</td>
+                                        <td class="py-2 bb-1 text-right"><t t-esc="'{:,.2f}'.format(o.amount_total)"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center"><t t-esc="company.state_id.name"/>, <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center">Yang Menerima,</td>
+                                    </tr>
+                                    <tr height="100"/>
+                                    <tr>
+                                        <td colspan="2" class="text-center">Widiya Nanda Gardhea Putri, S.Pd</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="paperformat_student_invoice" model="report.paperformat">
+        <field name="name">Student Invoice Paperformat</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">16</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_student_invoice" model="ir.actions.report">
+        <field name="name">Student Invoice</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">abu_submission_school_mgmt.report_student_invoice_template</field>
+        <field name="report_file">abu_submission_school_mgmt.report_student_invoice_template</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_student_invoice" />
+    </record>
+
+</odoo>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- GURU -->
+        <record id="agus_saputra_school_teacher" model="school.teacher">
+            <field name="name">Agus Saputra</field>
+            <field name="nip">00001</field>
+            <field name="street">Jl. Melati No. 12</field>
+            <field name="city">Tangerang Selatan</field>
+            <field name="country_id" ref="base.id"/>
+            <field name="state_id" ref="base.state_id_yo"/>
+            <field name="zip">90241</field>
+            <field name="email">agus.saputra@sekolah.id</field>
+            <field name="phone">+62 812-1234-5678</field>
+        </record>
+
+        <record id="sri_mulyani_school_teacher" model="school.teacher">
+            <field name="name">Sri Mulyani</field>
+            <field name="nip">00002</field>
+            <field name="street">Jl. Mawar No. 3</field>
+            <field name="city">Tangerang Selatan</field>
+            <field name="country_id" ref="base.id"/>
+            <field name="state_id" ref="base.state_id_yo"/>
+            <field name="zip">90241</field>
+            <field name="email">sri.mulyani@sekolah.id</field>
+            <field name="phone">+62 813-9876-5432</field>
+        </record>
+
+        <record id="budi_santoso_school_teacher" model="school.teacher">
+            <field name="name">Budi Santoso</field>
+            <field name="nip">00003</field>
+            <field name="street">Jl. Kenanga No. 9</field>
+            <field name="city">Tangerang Selatan</field>
+            <field name="country_id" ref="base.id"/>
+            <field name="state_id" ref="base.state_id_yo"/>
+            <field name="zip">90241</field>
+            <field name="email">budi.santoso@sekolah.id</field>
+            <field name="phone">+62 856-9876-5432</field>
+        </record>
+
+        <!-- KELAS XI A -->
+        <record id="xi_a_school_classroom" model="school.classroom">
+            <field name="name">XI A</field>
+            <field name="teacher_id" ref="agus_saputra_school_teacher"/>
+            <field name="teacher_ids" eval="[
+                Command.clear(),
+                Command.link(ref('sri_mulyani_school_teacher')),
+                Command.link(ref('budi_santoso_school_teacher')),
+            ]"/>
+            <field name="student_ids" eval="[
+                Command.clear(),
+                Command.create({'name': 'Rizky Maulana',      'nis': '33278'}),
+                Command.create({'name': 'Nadia Putri',        'nis': '93380'}),
+                Command.create({'name': 'Ilham Pratama',      'nis': '10497'}),
+                Command.create({'name': 'Dewi Sartika',       'nis': '69099'}),
+                Command.create({'name': 'Rina Suryani',       'nis': '68977'}),
+                Command.create({'name': 'Eka Ramdani',        'nis': '53609'}),
+                Command.create({'name': 'Fajar Nugraha',      'nis': '37390'}),
+                Command.create({'name': 'Ayu Lestari',        'nis': '39690'}),
+                Command.create({'name': 'Dani Wijaya',        'nis': '52216'}),
+                Command.create({'name': 'Lina Hartati',       'nis': '61467'})
+            ]"/>
+        </record>
+
+        <!-- KELAS XI B -->
+        <record id="xi_b_school_classroom" model="school.classroom">
+            <field name="name">XI B</field>
+            <field name="teacher_id" ref="budi_santoso_school_teacher"/>
+            <field name="teacher_ids" eval="[
+                Command.clear(),
+                Command.link(ref('sri_mulyani_school_teacher')),
+                Command.link(ref('agus_saputra_school_teacher')),
+            ]"/>
+            <field name="student_ids" eval="[
+                Command.clear(),
+                Command.create({'name': 'Dimas Saputra',      'nis': '39137'}),
+                Command.create({'name': 'Siti Aminah',        'nis': '27527'}),
+                Command.create({'name': 'Reza Gunawan',       'nis': '35645'}),
+                Command.create({'name': 'Nurul Huda',         'nis': '39519'}),
+                Command.create({'name': 'Bayu Wicaksono',     'nis': '46590'}),
+                Command.create({'name': 'Mega Andriani',      'nis': '80281'}),
+                Command.create({'name': 'Yusuf Anwar',        'nis': '86644'}),
+                Command.create({'name': 'Lutfi Hasan',        'nis': '91004'}),
+                Command.create({'name': 'Nita Puspitasari',   'nis': '83074'}),
+                Command.create({'name': 'Indah Wahyuni',      'nis': '77538'})
+            ]"/>
+        </record>
+    </data>
+</odoo>

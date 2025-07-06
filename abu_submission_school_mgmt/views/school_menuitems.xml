@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="abu_submission_school_mgmt_menu" name="School" sequence="10">
+        <menuitem id="school_classroom_menu" name="Classrooms" action="school_classroom_action" sequence="10"/>
+        <menuitem id="school_teacher_menu" name="Teachers" action="school_teacher_action" sequence="10"/>
+        <menuitem id="school_student_menu" name="Students" action="school_student_action" sequence="10"/>
+    </menuitem>
+</odoo>

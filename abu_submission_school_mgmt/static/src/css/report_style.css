@@ -1,0 +1,109 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+span {
+    display: inline-block;
+}
+
+table,
+tr,
+th,
+td {
+    font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border: 0px solid transparent;
+    font-size: 14px;
+    vertical-align: middle;
+    border-collapse: collapse;
+    padding: 2px 10px;
+    font-weight: normal;
+}
+
+.b-1 {
+    border: 1px solid black;
+}
+
+.bt-1 {
+    border-top: 1px solid black;
+}
+
+.bb-1 {
+    border-bottom: 1px solid black;
+}
+
+.bl-1 {
+    border-left: 1px solid black;
+}
+
+.br-1 {
+    border-right: 1px solid black;
+}
+
+.bx-1 {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.by-1 {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.p-1 {
+    padding: 1px;
+}
+
+.py-5 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.pl-10 {
+    padding-left: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.text-md {
+    font-size: 18px;
+}
+
+.text-lg {
+    font-size: 20px;
+}
